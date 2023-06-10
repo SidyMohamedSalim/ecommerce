@@ -6,7 +6,7 @@ import { products } from "../../../src/data/products"
 import { productType } from "../../../types/product"
 
 const page = ({ params }: { params: { productId: string } }) => {
-  const product: productType = products[Number(params.productId)]
+  const product: productType = products[Number(params.productId) - 1]
 
   return <Product product={product} />
 }

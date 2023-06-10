@@ -1,5 +1,4 @@
 import { CardproductType, productType } from "../../types/product"
-import { products } from "../data/products"
 
 type ProductProps = {
   product: productType
@@ -9,7 +8,8 @@ type ProductProps = {
 export const addToCart = ({ product, cardProducts }: ProductProps) => {
   if (cardProducts.find((item) => item.id === product.id)) {
     const item = cardProducts.find((item) => item.id === product.id)
-    if (item){ item.qte += 1
+    if (item) {
+      item.qte += 1
       console.log(item.qte)
     }
 
