@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Afia-Shop",
+  name: "Afia-Cake",
   description: "Beautifull site web  e-commerce using Next Js.",
   mainNav: [
     {

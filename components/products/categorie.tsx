@@ -28,7 +28,6 @@ export default function CategoresProducts({ nameCat }: { nameCat: string }) {
                         {product.name}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm ">{product.colors[0].name}</p>
                   </div>
                   <p className="text-sm font-medium">{product.price}</p>
                 </div>
