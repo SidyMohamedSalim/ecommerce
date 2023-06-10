@@ -20,7 +20,7 @@ export default function IndexPage() {
           <p className="text-center text-gray-400">
             Hello welcome to the shopping website We offer you the best products
           </p>
-          <Link href="/docs/getting-started" className={buttonVariants()}>
+          <Link href="/products" className={buttonVariants()}>
             Eat Now
           </Link>
         </div>
