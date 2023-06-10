@@ -1,18 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import Link from "next/link"
+import { useCardProduct } from "@/src/admin/CardContext"
 import { RadioGroup } from "@headlessui/react"
 import { StarIcon } from "@heroicons/react/20/solid"
 
+import { addToCart, countProduitCard } from "../../src/admin/productManage"
+import { products } from "../../src/data/products"
 import { productType } from "../../types/product"
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ")
-}
-
 export default function Product({ product }: { product: productType }) {
+  const { cardProducts, setTotal } = useCardProduct()
+
+  const onSubmite = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    addToCart({
+      product,
+      cardProducts,
+    })
+    setTotal(countProduitCard({ product, cardProducts }))
+    console.log(cardProducts)
+  }
+
   return (
     <div>
       <div className="pt-6">
@@ -62,32 +73,29 @@ export default function Product({ product }: { product: productType }) {
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
             <p className="text-3xl tracking-tight ">{product.price}</p>
+            {/* Products highlights */}
+            {product.highlights && (
+              <div className="mt-10">
+                <h3 className="text-sm font-medium ">Highlights</h3>
 
-            <form className="mt-10">
-              {/* Products highlights */}
-              {product.highlights && (
-                <div className="mt-10">
-                  <h3 className="text-sm font-medium ">Highlights</h3>
-
-                  <div className="mt-4">
-                    <ul
-                      role="list"
-                      className="list-disc space-y-2 pl-4 text-sm"
-                    >
-                      {product.highlights.map((highlight) => (
-                        <li key={highlight} className="text-gray-400">
-                          <span className="text-gray-400">{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="mt-4">
+                  <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
+                    {product.highlights.map((highlight) => (
+                      <li key={highlight} className="text-gray-400">
+                        <span className="text-gray-400">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              )}
+              </div>
+            )}
+
+            <form className="mt-10" onSubmit={(e) => onSubmite(e)}>
               <button
                 type="submit"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-8 py-3 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
               >
-                Add to bag
+                Command Now
               </button>
             </form>
           </div>

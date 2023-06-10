@@ -22,7 +22,7 @@ export default function Features() {
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
           <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
-            Technical Specifications
+            Creative for the month
           </h2>
           <p className="mt-4 ">
             The walnut wood card tray is precision milled to perfectly fit a

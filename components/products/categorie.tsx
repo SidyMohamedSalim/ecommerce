@@ -1,7 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
+"use client"
 
+/* eslint-disable @next/next/no-img-element */
+import { use } from "react"
 import Link from "next/link"
 import { products } from "@/src/data/products"
+import { FileBadge } from "lucide-react"
+
+import { Button, buttonVariants } from "@/components/ui/button"
 
 export default function CategoresProducts({ nameCat }: { nameCat: string }) {
   return (
@@ -23,10 +28,20 @@ export default function CategoresProducts({ nameCat }: { nameCat: string }) {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm">
-                      <a href={product.href}>
+                      <Link href={product.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
-                      </a>
+                      </Link>
+                    </h3>
+                    <h3 className="text-sm">
+                      <Button
+                        onClick={() => console.log("add to cart")}
+                        className={"rounded-md  "}
+                        variant={"secondary"}
+                      >
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        More...
+                      </Button>
                     </h3>
                   </div>
                   <p className="text-sm font-medium">{product.price}</p>

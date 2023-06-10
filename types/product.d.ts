@@ -27,4 +27,9 @@ id: number,
     description:string,
     highlights: string[]?,
     details:string?,
-  }
+}
+
+export type CardproductType = {
+  qte: number
+} & productType;
+
