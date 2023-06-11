@@ -3,18 +3,26 @@
 "use client"
 
 import Link from "next/link"
+import { addQuantite } from "@/src/features/card/cardSclice"
 import { Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
-import { totalProduitCardPrixTTC } from "../../src/admin/productManage"
-import { useAppSelector } from "../../src/hooks"
+import {
+  PROMO,
+  TVA,
+  totalProduitCardPrix,
+  totalProduitCardPrixTTC,
+} from "../../src/admin/productManage"
+import { useAppDispatch, useAppSelector } from "../../src/hooks"
 
 export default function Card() {
   const cardProducts = useAppSelector((state) => state.card.cardProduct)
   console.log("produit", cardProducts)
+  const dispactch = useAppDispatch()
 
-  const totalPriceCard = totalProduitCardPrixTTC({ cardProducts })
+  const totalProduitCardPrice = totalProduitCardPrix({ cardProducts })
+  const totalPriceCardTTC = totalProduitCardPrixTTC({ cardProducts })
 
   return (
     <div className="m-7 mx-auto flex max-w-5xl flex-col justify-center rounded-md border p-4 px-5 py-9">
@@ -52,9 +60,14 @@ export default function Card() {
               <div>
                 <div>
                   <input
+                    onChange={(e) => {
+                      dispactch(
+                        addQuantite({ product, qte: Number(e.target.value) })
+                      )
+                    }}
                     className="w-16 rounded-md border px-2"
                     type="number"
-                    defaultValue={product.qte}
+                    defaultValue={String(product.qte)}
                     min="1"
                   ></input>
                 </div>
@@ -66,7 +79,7 @@ export default function Card() {
               </div>
               {/* Price product */}
               <div className="font-bold">
-                <h1>{product.price}</h1>
+                <h1>${product.price}</h1>
               </div>
             </div>
           ))
@@ -78,22 +91,22 @@ export default function Card() {
       <div className="mx-auto my-5 flex w-full  max-w-xl flex-col items-end justify-end  align-middle sm:min-w-[400px]">
         <div className="my-2 flex w-full  justify-between rounded-sm bg-gray-100  p-2 dark:bg-gray-700">
           <h1 className="">SubTotal</h1>
-          <h2>$99.00</h2>
+          <h2>${totalProduitCardPrice}</h2>
         </div>
 
         <div className="my-2 flex w-full  justify-between rounded-sm bg-gray-100  p-2 dark:bg-gray-700">
-          <h1>Shipping</h1>
-          <h2>$7.00</h2>
+          <h1>Win</h1>
+          <h2>{PROMO * 100}%</h2>
         </div>
 
         <div className="my-2 flex w-full  justify-between rounded-sm bg-gray-100  p-2 dark:bg-gray-700">
           <h1>Tax</h1>
-          <h2>$9.00</h2>
+          <h2>{TVA * 100}%</h2>
         </div>
 
         <div className="my-2 flex w-full  justify-between rounded-sm bg-gray-100  p-2 dark:bg-gray-700">
           <h1 className="font-bold">Order Total</h1>
-          <h2 className="font-bold">${totalPriceCard} </h2>
+          <h2 className="font-bold">${totalPriceCardTTC} </h2>
         </div>
 
         <Button className="mb-5 mt-10  w-full  justify-center rounded-sm p-2 ">

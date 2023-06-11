@@ -18,8 +18,7 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     addProduit: (state, action) => {
-      state.cardProduct.push(action.payload)
-      state.total = state.cardProduct.length
+      state.total += 1
       if (state.cardProduct.some((item) => item.id === action.payload.id)) {
         const item = state.cardProduct.find(
           (item) => item.id === action.payload.id
@@ -35,15 +34,20 @@ export const cardSlice = createSlice({
         ...action.payload,
       })
     },
+    addQuantite: (state, action) => {
+      const item = state.cardProduct.find(
+        (item) => item.id === action.payload.product.id
+      )
+      if (item) {
+        item.qte = action.payload.qte
+      }
+    },
     deleteProduit: (state, action) => {
       state.cardProduct.filter((p) => p.id !== action.payload)
-    },
-    addTotal: (state) => {
-      state.total = state.cardProduct.length
     },
   },
 })
 
-export const { addProduit, deleteProduit } = cardSlice.actions
+export const { addProduit, deleteProduit, addQuantite } = cardSlice.actions
 
 export default cardSlice.reducer

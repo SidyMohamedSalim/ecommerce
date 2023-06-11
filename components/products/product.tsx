@@ -70,7 +70,7 @@ export default function Product({ product }: { product: productType }) {
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight ">{product.price}</p>
+              <p className="text-3xl tracking-tight ">${product.price}</p>
               {/* Products highlights */}
               {product.highlights && (
                 <div className="mt-10">

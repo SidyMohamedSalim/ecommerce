@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Basic Tee 6-Pack",
-    price: "$192",
+    price: 192,
     href: "#",
 
     images: [
@@ -38,7 +38,7 @@ export const products = [
   {
     id: 2,
     name: "Basic Tee 6-Pack",
-    price: "$192",
+    price: 92,
     href: "#",
 
     images: [
@@ -74,7 +74,7 @@ export const products = [
   {
     id: 3,
     name: "Basic Tee 6-Pack",
-    price: "$192",
+    price: 192,
     href: "#",
 
     images: [
@@ -109,7 +109,7 @@ export const products = [
   {
     id: 4,
     name: "Basic Tee 6-Pack",
-    price: "$192",
+    price: 192,
     href: "#",
 
     images: [

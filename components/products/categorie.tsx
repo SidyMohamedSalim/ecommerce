@@ -59,7 +59,7 @@ export default function CategoresProducts({
                         </Button>
                       </h3>
                     </div>
-                    <p className="text-sm font-medium">{product.price}</p>
+                    <p className="text-sm font-medium">${product.price}</p>
                   </div>
                 </div>
               </Link>

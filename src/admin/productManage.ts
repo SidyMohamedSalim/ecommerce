@@ -5,6 +5,10 @@ type ProductProps = {
   cardProducts: CardproductType[]
 }
 
+// CONSTANTS
+export const TVA = 0.2
+export const PROMO = 0.3
+
 export const removeFromCart = ({ product, cardProducts }: ProductProps) => {
   cardProducts.splice(cardProducts.indexOf({ qte: 1, ...product }), 1)
 }
@@ -16,13 +20,13 @@ const clearCart = ({ cardProduct }: { cardProduct: productType[] }) => {
 export const totalProduitCardPrix = ({
   cardProducts,
 }: {
-  cardProducts: productType[]
+  cardProducts: CardproductType[]
 }) => {
   let total = 0
   cardProducts.forEach((product) => {
-    total += Number(product.price)
+    total += Number(product.price) * product.qte
   })
-  return total
+  return Number(total).toFixed(2)
 }
 
 export const totalProduitCardPrixTTC = ({
@@ -32,9 +36,9 @@ export const totalProduitCardPrixTTC = ({
 }) => {
   let total = 0
   cardProducts.map((product) => {
-    total += Number(product.price)
+    total += Number(product.price) * (1 + TVA) * product.qte
   })
-  return total
+  return Number(total).toFixed(2)
 }
 
 export const totalProduitPrice = ({ product }: { product: productType }) => {
