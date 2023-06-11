@@ -20,9 +20,12 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            <Link href={siteConfig.links.github} rel="noreferrer">
+            <Link href={siteConfig.links.card} rel="noreferrer">
               <div className="ml-4 flow-root lg:ml-6">
-                <Link href="#" className="group -m-2 flex items-center p-2">
+                <Link
+                  href={siteConfig.links.card}
+                  className="group -m-2 flex items-center p-2"
+                >
                   <ShoppingBagIcon
                     className="h-6 w-6 shrink-0 "
                     aria-hidden="true"
