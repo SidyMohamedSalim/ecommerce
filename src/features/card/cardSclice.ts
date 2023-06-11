@@ -18,7 +18,6 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     addProduit: (state, action) => {
-      state.total += 1
       if (state.cardProduct.some((item) => item.id === action.payload.id)) {
         const item = state.cardProduct.find(
           (item) => item.id === action.payload.id
@@ -26,13 +25,17 @@ export const cardSlice = createSlice({
         if (item) {
           item.qte = Number(item.qte) + 1
         }
-
-        return
+      } else {
+        state.cardProduct.push({
+          qte: 1,
+          ...action.payload,
+        })
       }
-      state.cardProduct.push({
-        qte: 1,
-        ...action.payload,
+      let total = 0
+      state.cardProduct.map((p) => {
+        total += p.qte
       })
+      state.total = total
     },
     addQuantite: (state, action) => {
       const item = state.cardProduct.find(
@@ -41,9 +44,21 @@ export const cardSlice = createSlice({
       if (item) {
         item.qte = action.payload.qte
       }
+      let total = 0
+      state.cardProduct.map((p) => {
+        total += p.qte
+      })
+      state.total = total
     },
     deleteProduit: (state, action) => {
-      state.cardProduct.filter((p) => p.id !== action.payload)
+      state.cardProduct = state.cardProduct.filter(
+        (p) => p.id !== action.payload.id
+      )
+      let total = 0
+      state.cardProduct.map((p) => {
+        total += p.qte
+      })
+      state.total = total
     },
   },
 })

@@ -6,9 +6,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline"
 import { siteConfig } from "@/config/site"
 import { MainNav } from "@/components/main-nav"
 
-import { useCardProduct } from "../src/admin/CardContext"
 import { useAppSelector } from "../src/hooks"
-import { productType } from "../types/product"
 import { ThemeToggle } from "./theme-toggle"
 
 export function SiteHeader() {

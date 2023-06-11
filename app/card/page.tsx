@@ -3,7 +3,7 @@
 "use client"
 
 import Link from "next/link"
-import { addQuantite } from "@/src/features/card/cardSclice"
+import { addQuantite, deleteProduit } from "@/src/features/card/cardSclice"
 import { Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -59,6 +59,7 @@ export default function Card() {
               {/* Product quantity */}
               <div>
                 <div>
+                  <h2 className="mb-4">quantity :</h2>
                   <input
                     onChange={(e) => {
                       dispactch(
@@ -71,15 +72,21 @@ export default function Card() {
                     min="1"
                   ></input>
                 </div>
-                <div className="mt-2">
-                  <Link className="text-sm font-bold" href={"#"}>
-                    Remove
-                  </Link>
-                </div>
               </div>
               {/* Price product */}
               <div className="font-bold">
                 <h1>${product.price}</h1>
+              </div>
+              <div className="mt-2 flex items-center justify-center">
+                <Button
+                  variant={"outline"}
+                  onClick={() => {
+                    dispactch(deleteProduit(product))
+                  }}
+                  className="text-sm font-bold"
+                >
+                  X
+                </Button>
               </div>
             </div>
           ))
