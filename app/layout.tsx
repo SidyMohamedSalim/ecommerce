@@ -1,7 +1,5 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
-import { configureStore } from "@reduxjs/toolkit"
-import { Provider } from "react-redux"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -10,7 +8,7 @@ import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
-import CardProvider from "../src/admin/CardContext"
+import StoreProvider from "../src/pages/StoreProvider"
 
 export const metadata: Metadata = {
   title: {
@@ -33,28 +31,19 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export const store = configureStore({
-  reducer: {},
-})
-
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <CardProvider>
+      <StoreProvider>
+        <html lang="en" suppressHydrationWarning>
+          <head />
+          <body
+            className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable
+            )}
+          >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <>
                 <div className="relative flex min-h-screen flex-col">
                   <SiteHeader />
@@ -62,10 +51,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </div>
                 <TailwindIndicator />
               </>
-            </CardProvider>
-          </ThemeProvider>
-        </body>
-      </html>
+            </ThemeProvider>
+          </body>
+        </html>
+      </StoreProvider>
     </>
   )
 }

@@ -2,20 +2,19 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 "use client"
 
-import { Fragment, useState } from "react"
 import Link from "next/link"
-import { Dialog, Transition } from "@headlessui/react"
-import { XMarkIcon } from "@heroicons/react/24/outline"
-import { clsx } from "clsx"
 import { Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
-import { useCardProduct } from "../../src/admin/CardContext"
+import { totalProduitCardPrixTTC } from "../../src/admin/productManage"
+import { useAppSelector } from "../../src/hooks"
 
 export default function Card() {
-  const { cardProducts } = useCardProduct()
+  const cardProducts = useAppSelector((state) => state.card.cardProduct)
   console.log("produit", cardProducts)
+
+  const totalPriceCard = totalProduitCardPrixTTC({ cardProducts })
 
   return (
     <div className="m-7 mx-auto flex max-w-5xl flex-col justify-center rounded-md border p-4 px-5 py-9">
@@ -94,7 +93,7 @@ export default function Card() {
 
         <div className="my-2 flex w-full  justify-between rounded-sm bg-gray-100  p-2 dark:bg-gray-700">
           <h1 className="font-bold">Order Total</h1>
-          <h2 className="font-bold">$120.00</h2>
+          <h2 className="font-bold">${totalPriceCard} </h2>
         </div>
 
         <Button className="mb-5 mt-10  w-full  justify-center rounded-sm p-2 ">

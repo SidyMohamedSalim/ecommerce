@@ -4,24 +4,19 @@
 import { FormEvent, useState } from "react"
 import Link from "next/link"
 import { useCardProduct } from "@/src/admin/CardContext"
+import { addProduit } from "@/src/features/card/cardSclice"
 import { RadioGroup } from "@headlessui/react"
 import { StarIcon } from "@heroicons/react/20/solid"
+import { useDispatch } from "react-redux"
 
-import { addToCart, countProduitCard } from "../../src/admin/productManage"
 import { products } from "../../src/data/products"
 import { productType } from "../../types/product"
 
 export default function Product({ product }: { product: productType }) {
-  const { cardProducts, setTotal } = useCardProduct()
-
+  const dispatch = useDispatch()
   const onSubmite = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    addToCart({
-      product,
-      cardProducts,
-    })
-    setTotal(countProduitCard({ product, cardProducts }))
-    console.log(cardProducts)
+    dispatch(addProduit(product))
   }
 
   console.log(product)

@@ -2,6 +2,7 @@
 import { url } from "inspector"
 import Image from "next/image"
 import Link from "next/link"
+import { products } from "@/src/data/products"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
@@ -26,7 +27,7 @@ export default function IndexPage() {
         </div>
         <img className="mt-8 w-[100%] sm:w-[50%]" src={"/cake.svg"} alt="" />
       </section>
-      <CategoresProducts nameCat="New Arrivals" />
+      <CategoresProducts products={products} nameCat="New Arrivals" />
       <Features />
     </>
   )
