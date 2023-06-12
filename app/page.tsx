@@ -28,7 +28,6 @@ export default function IndexPage() {
         <img className="mt-8 w-[100%] sm:w-[50%]" src={"/cake.svg"} alt="" />
       </section>
       <CategoresProducts products={products} nameCat="New Arrivals" />
-      <Features />
     </>
   )
 }
