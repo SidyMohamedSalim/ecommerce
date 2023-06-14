@@ -8,13 +8,13 @@ import { Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
+import { useAppDispatch, useAppSelector } from "../../src/hooks"
 import {
   PROMO,
   TVA,
   totalProduitCardPrix,
   totalProduitCardPrixTTC,
-} from "../../src/admin/productManage"
-import { useAppDispatch, useAppSelector } from "../../src/hooks"
+} from "../../src/providers/productManage"
 
 export default function Card() {
   const cardProducts = useAppSelector((state) => state.card.cardProduct)
@@ -41,8 +41,8 @@ export default function Card() {
                 <div>
                   <img
                     className="h-28 w-32 rounded-sm"
-                    src={product.images[0].src}
-                    alt={product.images[0].alt}
+                    src={product.image}
+                    alt={product.name}
                   />
                 </div>
                 <div className=" ml-3">

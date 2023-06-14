@@ -1,146 +1,65 @@
-export const products = [
-  {
-    id: 1,
-    name: "Basic Tee 6-Pack",
-    price: 192,
-    href: "#",
+import { client } from "@/src/db/client/client"
+import { PrismaClient, product, user } from "@prisma/client"
 
-    images: [
-      {
-        src: "/images/img1.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        src: "/images/img2.jpg",
-        alt: "Model wearing plain black basic tee.",
-      },
-      {
-        src: "/images/img4.jpg",
-        alt: "Model wearing plain gray basic tee.",
-      },
-      {
-        src: "/images/img5.jpg",
-        alt: "Model wearing plain white basic tee.",
-      },
-    ],
+import { prisma } from "../db/prisma"
 
-    description:
-      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-      "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
-      "Pre-washed & pre-shrunk",
-      "Ultra-soft 100% cotton",
-    ],
-    details:
-      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-  },
-  {
-    id: 2,
-    name: "Basic Tee 6-Pack",
-    price: 92,
-    href: "#",
+export async function main() {
+  return await {
+    createUser,
+    createProduct,
+    getAllProducts,
+    getProductById,
+    updateProduct,
+    deleteProduct,
+  }
+}
 
-    images: [
-      {
-        src: "/images/img3.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        src: "/images/img2.jpg",
-        alt: "Model wearing plain black basic tee.",
-      },
-      {
-        src: "/images/img4.jpg",
-        alt: "Model wearing plain gray basic tee.",
-      },
-      {
-        src: "/images/img5.jpg",
-        alt: "Model wearing plain white basic tee.",
-      },
-    ],
-    description:
-      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-      "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
-      "Pre-washed & pre-shrunk",
-      "Ultra-soft 100% cotton",
-    ],
-    details:
-      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-  },
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
 
-  {
-    id: 3,
-    name: "Basic Tee 6-Pack",
-    price: 192,
-    href: "#",
+const createUser = async (data: user) => {
+  return await prisma.user.create({
+    data,
+  })
+}
+export const createProduct = async (data: product) => {
+  return await prisma.product.create({
+    data,
+  })
+}
 
-    images: [
-      {
-        src: "/images/img4.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        src: "/images/img2.jpg",
-        alt: "Model wearing plain black basic tee.",
-      },
-      {
-        src: "/images/img4.jpg",
-        alt: "Model wearing plain gray basic tee.",
-      },
-      {
-        src: "/images/img5.jpg",
-        alt: "Model wearing plain white basic tee.",
-      },
-    ],
-    description:
-      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-      "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
-      "Pre-washed & pre-shrunk",
-      "Ultra-soft 100% cotton",
-    ],
-    details:
-      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-  },
-  {
-    id: 4,
-    name: "Basic Tee 6-Pack",
-    price: 192,
-    href: "#",
+export const getAllProducts = async () => {
+  return await prisma.product.findMany()
+}
 
-    images: [
-      {
-        src: "/images/img5.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        src: "/images/img2.jpg",
-        alt: "Model wearing plain black basic tee.",
-      },
-      {
-        src: "/images/img4.jpg",
-        alt: "Model wearing plain gray basic tee.",
-      },
-      {
-        src: "/images/img5.jpg",
-        alt: "Model wearing plain white basic tee.",
-      },
-    ],
-    description:
-      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-      "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
-      "Pre-washed & pre-shrunk",
-      "Ultra-soft 100% cotton",
-    ],
-    details:
-      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-  },
+export const getProductById = async (id: string) => {
+  return await prisma.product.findUnique({
+    where: {
+      id,
+    },
+  })
+}
 
-  // More products...
-]
+export const updateProduct = async (id: string, data: product) => {
+  return await prisma.product.update({
+    where: {
+      id,
+    },
+    data,
+  })
+}
+
+export const deleteProduct = async (id: string) => {
+  return await prisma.product.delete({
+    where: {
+      id,
+    },
+  })
+}

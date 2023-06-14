@@ -1,3 +1,5 @@
+import { product } from "@prisma/client"
+
 export type productType = {
   id: number
   name: string
@@ -14,4 +16,4 @@ export type productType = {
 
 export type CardproductType = {
   qte: number
-} & productType
+} & product

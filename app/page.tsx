@@ -1,16 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { url } from "inspector"
-import Image from "next/image"
-import Link from "next/link"
-import { products } from "@/src/data/products"
+"use client"
 
-import { siteConfig } from "@/config/site"
+import Link from "next/link"
+
 import { buttonVariants } from "@/components/ui/button"
 
-import CategoresProducts from "../components/products/categorie"
-import Features from "../components/products/productsfeatures"
-
-export default function IndexPage() {
+export default async function IndexPage() {
   return (
     <>
       <section className="flex flex-wrap items-center justify-center gap-6 bg-cover  pb-8 pt-6 align-middle sm:container sm:flex-nowrap md:py-10">
@@ -27,7 +22,6 @@ export default function IndexPage() {
         </div>
         <img className="mt-8 w-[100%] sm:w-[50%]" src={"/cake.svg"} alt="" />
       </section>
-      <CategoresProducts products={products} nameCat="New Arrivals" />
     </>
   )
 }

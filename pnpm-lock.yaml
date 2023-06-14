@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@faker-js/faker': ^8.0.2
   '@headlessui/react': ^1.7.15
   '@heroicons/react': ^2.0.18
   '@ianvs/prettier-plugin-sort-imports': ^3.7.2
@@ -8,6 +9,7 @@ specifiers:
   '@radix-ui/react-slot': ^1.0.2
   '@reduxjs/toolkit': ^1.9.5
   '@tailwindcss/aspect-ratio': ^0.4.2
+  '@tanstack/react-query': ^4.29.12
   '@types/node': ^17.0.45
   '@types/react': ^18.2.7
   '@types/react-dom': ^18.2.4
@@ -35,6 +37,7 @@ specifiers:
   tailwindcss-animate: ^1.0.5
   ts-node: ^10.9.1
   typescript: ^4.9.5
+  zod: ^3.21.4
 
 dependencies:
   '@headlessui/react': 1.7.15_biqbaboplfbrettd7655fr4n2y
@@ -43,6 +46,7 @@ dependencies:
   '@radix-ui/react-slot': 1.0.2_xomkljxbsahfbuzbqqeyw47ndm
   '@reduxjs/toolkit': 1.9.5_mdrgh7pftervsmldwkouzrv5ry
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.3.2
+  '@tanstack/react-query': 4.29.12_biqbaboplfbrettd7655fr4n2y
   class-variance-authority: 0.4.0_typescript@4.9.5
   clsx: 1.2.1
   lucide-react: 0.105.0-alpha.4_react@18.2.0
@@ -54,8 +58,10 @@ dependencies:
   sharp: 0.31.3
   tailwind-merge: 1.13.1
   tailwindcss-animate: 1.0.6_tailwindcss@3.3.2
+  zod: 3.21.4
 
 devDependencies:
+  '@faker-js/faker': 8.0.2
   '@ianvs/prettier-plugin-sort-imports': 3.7.2_prettier@2.8.8
   '@types/node': 17.0.45
   '@types/react': 18.2.9
@@ -330,6 +336,11 @@ packages:
   /@eslint/js/8.42.0:
     resolution: {integrity: sha512-6SWlXpWU5AvId8Ac7zjzmIOqMOba/JWY8XZ4A7q7Gn1Vlfg/SFFIlrtHXt9nPn4op9ZPAkl91Jao+QQv3r/ukw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@faker-js/faker/8.0.2:
+    resolution: {integrity: sha512-Uo3pGspElQW91PCvKSIAXoEgAUlRnH29sX2/p89kg7sP1m2PzCufHINd0FhTXQf6DYGiUlVncdSPa2F9wxed2A==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: true
 
   /@headlessui/react/1.7.15_biqbaboplfbrettd7655fr4n2y:
@@ -623,6 +634,28 @@ packages:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
       tailwindcss: 3.3.2_ts-node@10.9.1
+    dev: false
+
+  /@tanstack/query-core/4.29.11:
+    resolution: {integrity: sha512-8C+hF6SFAb/TlFZyS9FItgNwrw4PMa7YeX+KQYe2ZAiEz6uzg6yIr+QBzPkUwZ/L0bXvGd1sufTm3wotoz+GwQ==}
+    dev: false
+
+  /@tanstack/react-query/4.29.12_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-zhcN6+zF6cxprxhTHQajHGlvxgK8npnp9uLe9yaWhGc6sYcPWXzyO4raL4HomUzQOPzu3jLvkriJQ7BOrDM8vA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.29.11
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /@tsconfig/node10/1.0.9:

@@ -11,7 +11,6 @@ import { ThemeToggle } from "./theme-toggle"
 
 export function SiteHeader() {
   const total = useAppSelector((state) => state.card.total)
-  console.log(total)
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
