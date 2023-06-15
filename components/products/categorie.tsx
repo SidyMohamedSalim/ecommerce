@@ -16,7 +16,7 @@ const CategoresProducts = ({
   category: category
   products: product[]
 }) => {
-  if (!products) {
+  if (!products || products.length === 0) {
     return <></>
   }
   return (

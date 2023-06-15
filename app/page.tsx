@@ -9,7 +9,7 @@ import { prisma } from "../src/db/prisma"
 
 export default async function IndexPage() {
   const category = await prisma.category.findMany({
-    take: 2,
+    take: 4,
   })
   if (!category) {
     return <></>
