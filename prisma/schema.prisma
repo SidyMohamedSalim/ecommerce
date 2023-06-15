@@ -23,6 +23,9 @@ model product {
   catetorieId String
   orderItem   orderItem[]
 
+  card   card?   @relation(fields: [cardId], references: [id])
+  cardId String?
+
   @@map("products")
 }
 
@@ -46,7 +49,7 @@ model user {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
   order     order[]
-  cart      cart[]
+  card      card[]
 
   @@map("users")
 }
@@ -77,13 +80,15 @@ model orderItem {
   @@map("orderItems")
 }
 
-model cart {
+model card {
   id        String   @id @default(cuid())
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
   user user @relation(fields: [userId], references: [id])
+
+  products product[]
 
   @@map("carts")
 }

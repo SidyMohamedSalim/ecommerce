@@ -8,7 +8,7 @@ const main = async () => {
   const usersPromises = []
   for (let i = 0; i < 10; i++) {
     const user: user = {
-      name: faker.name.firstName(),
+      name: faker.person.firstName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
       id: faker.string.uuid(),
@@ -43,13 +43,15 @@ const main = async () => {
     )
   }
 
+  const categories = await Promise.all(categoryPromises)
+
   // loop for 100 times
   const productsPromises = []
 
   for (let i = 0; i < 50; i++) {
-    const randomInt = faker.number.int({ max: 9, min: 0 })
+    const randomInt = faker.number.int({ max: categories.length - 1, min: 0 })
 
-    const categoryId = (await categoryPromises[randomInt]).id
+    const categoryId = categories[randomInt].id
 
     const product: product = {
       name: faker.commerce.productName(),
