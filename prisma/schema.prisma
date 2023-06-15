@@ -19,21 +19,21 @@ model product {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @default(now()) @updatedAt
 
-  categories category[]
-  orderItem  orderItem[]
+  categories  category    @relation(fields: [catetorieId], references: [id])
+  catetorieId String
+  orderItem   orderItem[]
 
   @@map("products")
 }
 
 model category {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
   description String?
   image       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
-
-  products product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  product     product[]
 
   @@map("categories")
 }

@@ -1,19 +1,21 @@
 import React from "react"
-import { client } from "@/src/db/client/client"
-import { useQuery } from "@tanstack/react-query"
 
-import CategoresProductis from "../../components/products/categorie"
-import { getAllProducts } from "../../src/data/products"
+import CategoresProducts from "../../components/products/categorie"
 import { prisma } from "../../src/db/prisma"
-// import { useProducts } from "../../src/data/hooks"
-import { productsScheme } from "../../src/scheme"
 
 const page = async () => {
-  const data = await prisma.product.findMany()
+  const category = await prisma.category.findMany()
 
   return (
     <div>
-      <CategoresProductis products={data} nameCat="News Arrivals" />
+      {category.map(async (cat) => {
+        const product = await prisma.product.findMany({
+          where: {
+            catetorieId: cat.id,
+          },
+        })
+        return <CategoresProducts category={cat} products={product} />
+      })}
     </div>
   )
 }

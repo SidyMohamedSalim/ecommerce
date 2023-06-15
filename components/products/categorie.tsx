@@ -3,23 +3,26 @@
 /* eslint-disable @next/next/no-img-element */
 import { use } from "react"
 import Link from "next/link"
-import { product } from "@prisma/client"
+import { category, product } from "@prisma/client"
 import { FileBadge } from "lucide-react"
 
 import { productType } from "@/types/product"
 import { Button, buttonVariants } from "@/components/ui/button"
 
-export default function CategoresProducts({
-  nameCat,
+const CategoresProducts = ({
+  category,
   products,
 }: {
-  nameCat: string
+  category: category
   products: product[]
-}) {
+}) => {
+  if (!products) {
+    return <></>
+  }
   return (
     <div>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight ">{nameCat}</h2>
+        <h2 className="text-2xl font-bold tracking-tight ">{category.name}</h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products &&
@@ -70,3 +73,5 @@ export default function CategoresProducts({
     </div>
   )
 }
+
+export default CategoresProducts

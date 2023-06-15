@@ -1,5 +1,5 @@
 import { fa, faker } from "@faker-js/faker"
-import { PrismaClient, product, user } from "@prisma/client"
+import { PrismaClient, category, product, user } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
@@ -24,10 +24,33 @@ const main = async () => {
 
   const users = await Promise.all(usersPromises)
 
+  const categoryPromises = []
+
+  for (let i = 0; i < 10; i++) {
+    const category: category = {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+      description: faker.commerce.productDescription(),
+      image: faker.image.url(),
+      createdAt: faker.date.anytime(),
+      updatedAt: faker.date.recent(),
+    }
+
+    categoryPromises.push(
+      prisma.category.create({
+        data: category,
+      })
+    )
+  }
+
   // loop for 100 times
   const productsPromises = []
 
   for (let i = 0; i < 50; i++) {
+    const randomInt = faker.number.int({ max: 9, min: 0 })
+
+    const categoryId = (await categoryPromises[randomInt]).id
+
     const product: product = {
       name: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
@@ -36,6 +59,7 @@ const main = async () => {
       createdAt: faker.date.recent(),
       updatedAt: faker.date.recent(),
       image: faker.image.url(),
+      catetorieId: categoryId,
     }
     productsPromises.push(
       prisma.product.create({
